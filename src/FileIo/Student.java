@@ -1,9 +1,12 @@
 package FileIo;
 
+import java.io.Serializable;
+
 /**
  * Created by zf188 on 2020/2/12.
  */
-public class Student {
+public class Student implements Serializable {
+    private  static final long serialVersionUID = 1L;
     private Integer id;
     private String name;
     private Integer age;

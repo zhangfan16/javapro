@@ -32,7 +32,8 @@ public class Practice1 {
     *   追加内容
     *   字节/字符输入/输出流
     * */
-        File file = new File("e:/w.java");
+    //字节流写出
+//        File file = new File("e:/w.java");
    /*     try {
             System.out.println(file.createNewFile());
         } catch (IOException e) {
@@ -52,6 +53,7 @@ public class Practice1 {
             e.printStackTrace();
         }
 */
+   //字节流读取
         /*InputStream inputStream =null;
         try {
             inputStream = new FileInputStream(file);
@@ -80,6 +82,7 @@ public class Practice1 {
                 e.printStackTrace();
             }
         }*/
+        //字符流读取
 /*        char []a = new char[10];
         Reader reader = null;
         BufferedReader br = null;
@@ -111,8 +114,8 @@ public class Practice1 {
                         e.printStackTrace();
             }
         }*/
-
-        Writer writer = null;
+//字符流写出
+/*        Writer writer = null;
         try {
             writer = new FileWriter(file,true);
             writer.write("111111");
@@ -127,7 +130,43 @@ public class Practice1 {
                 } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
+//java对象保存到硬盘中
+// 该Java对象是可序列化对象，传输只能传字节流和字符流
+        //序列化将java对象转化为字节流/字符流
+        //反序列化 字节/字符流转为Java对象
+//Outputstream  objectoutputstream
+        Student student = new Student();
+        student.setId(10);
+        student.setName("掌声");
+        student.setAge(18);
+        student.setGrade("一班");
+        File file = new File("e:/student");
+        OutputStream outputStream =null;
+        ObjectOutputStream objectOutputStream = null;
 
+
+        try {
+           outputStream = new FileOutputStream(file);
+           objectOutputStream = new ObjectOutputStream(outputStream) ;
+            objectOutputStream.writeObject(student);
+            objectOutputStream.flush();
+            outputStream.flush();
+            System.out.println("保存完成");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if (objectOutputStream!= null)
+                        objectOutputStream.close();
+                if (outputStream!= null)
+                        outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
